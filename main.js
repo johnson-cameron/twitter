@@ -1,34 +1,26 @@
 "use strict";
-const main = {
-  template: `
-  <div id="container">
-    <h1>Tid-Bits</h1>
-    <button type="button" ng-click="$ctrl.openForm();">Add Post</button>
-    <form-list ng-show="$ctrl.formOpen" ng-submit="$ctrl.onSubmit(addPost);"></form-list>
-    <post ng-repeat="post in $ctrl.postList" post="post"></post>
-  </div>
+
+const socialPosts = {
+  template:`
+  <h1>Baby Twitter!!!!</h1>
+  <post-form add-tweet="$ctrl.addTweet(newTweet)"></post-form>
+  <section>
+    <posts ng-repeat="tweet in $ctrl.myTweets" tweet="tweet"></posts>
+  </section>
   `,
   controller: function() {
     const vm = this;
-    vm.postList = [
-      {title: "Titlerino", message: "Lorem ipsum dolor sit amet."},
-    ];
-    vm.openForm = () => {
-      vm.formOpen = true;
-    };
-    vm.onSubmit = (item) => {
-      console.log(item);
-      vm.postList.unshift({
-        title: item.title,
-        message: item.message
+    vm.myTweets= [];
+    vm.addTweet = (newTweet) => {
+      console.log(newTweet)
+      vm.myTweets.push({
+        title: newTweet.title,
+        message: newTweet.message
       })
-      item.title = "";
-      item.message = "";
-      vm.formOpen = false;
     };
   }
 };
 
 angular
   .module("app")
-  .component("main", main);
+  .component("socialPosts", socialPosts);

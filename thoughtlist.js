@@ -1,20 +1,20 @@
 "use strict";
 
-
-const post = {
+const posts = {
   bindings: {
-    post: "<"
+   tweet: "<"
   },
-  // our template for the component. We are ngRepeating the div on line 11 for each element in the contactList array
-  // the paragraph on line 12 will be hidden until the contactList has 1 element(or more)
-  template: `
+  template:`
   <section>
-    <h4>{{ $ctrl.post.title }}</h4>
-    <p>{{ $ctrl.post.message }}</p>
+    <h5>Title</h5>
+    <p> {{ $ctrl.tweet.title }} </p>
+    <h5>Message</h5>
+    <p> {{ $ctrl.tweet.message }} </p>
   </section>
   `
 }
 
+
 angular
   .module("app")
-  .component("post", post);
+  .component("posts", posts);

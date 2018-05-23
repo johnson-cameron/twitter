@@ -1,20 +1,34 @@
 "use strict";
-const formList = {
-  // using the function binding to bind the addThought function to into this component
+
+const postForm = {
   bindings: {
-    addThought: "&"
+    addTweet: "&"
   },
-  // the template for this component. big thing to note is line 9, the function addThought takes the argument of an object literal. The property newThought has the value of whatever our ngModel contains
-  template: `
-  <form ng-submit="$ctrl.onSubmit({ newPost: $ctrl.post.newPost});">
-    <input type="text" placeholder="title" ng-model="$ctrl.post.newPost.title">
-    <input type="text" ng-model="$ctrl.post.newPost.message">
-    <button>Add</button>
+  template:`
+  <button ng-click="$ctrl.showForm();">New Tweet</button>
+  <form ng-show="$ctrl.show" ng-submit="$ctrl.addTweet({ newTweet: $ctrl.newTweet }); $ctrl.closeForm();">
+    <label>Title</label>
+    <input type="text" ng-model="$ctrl.newTweet.title">
+    <label>Message</label>
+    <textarea ng-model="$ctrl.newTweet.message"></textarea>
+    <button>Post Tweet</button>
   </form>
-  `
+  `,
+  controller: function () {
+    const vm = this;
+    vm.showForm = () => {
+      vm.show = true;
+    };
+    vm.closeForm = () => {
+      vm.show = false;
+      vm.newTweet = {};
+    };
+
+  }
+
 };
 
 
 angular
   .module("app")
-  .component("formList", formList);
+  .component("postForm", postForm);
